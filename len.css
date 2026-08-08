@@ -1,0 +1,295 @@
+/* ==============================
+   CONFIGURACIÓN
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #000;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ==============================
+   ESCENA
+============================== */
+
+.escena {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ==============================
+   TEXTO
+============================== */
+
+.encabezado {
+    position: absolute;
+
+    top: 45px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 10;
+}
+
+.encabezado h1 {
+    color: white;
+
+    font-size: 42px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 10px #ff1493,
+        0 0 20px #ff1493,
+        0 0 40px #ff1493;
+
+    animation: aparecer 2s ease-out;
+}
+
+.encabezado h1 span {
+    color: #ff1493;
+
+    text-shadow:
+        0 0 5px #ff1493,
+        0 0 15px #ff1493,
+        0 0 30px #ff1493;
+}
+
+.encabezado p {
+    margin-top: 12px;
+
+    color: #ff9bdc;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 5px #ff1493,
+        0 0 15px #ff1493;
+
+    opacity: 0;
+
+    animation: aparecerTexto 2s ease-out 1.5s forwards;
+}
+
+
+/* ==============================
+   CORAZÓN
+============================== */
+
+.corazon {
+    position: absolute;
+
+    width: min(720px, 90vw);
+    height: min(720px, 80vh);
+
+    overflow: visible;
+
+    filter:
+        drop-shadow(0 0 3px white)
+        drop-shadow(0 0 8px #ff1493)
+        drop-shadow(0 0 18px #ff1493);
+
+    animation: latido 3s ease-in-out infinite;
+}
+
+
+/* ==============================
+   RAYOS
+============================== */
+
+.rayos {
+    overflow: visible;
+}
+
+.rayo {
+    fill: none;
+
+    stroke: var(--c);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(0 0 2px var(--c))
+        drop-shadow(0 0 5px var(--c))
+        drop-shadow(0 0 10px var(--c));
+
+    animation:
+        aparecerRayo 1.8s ease-out forwards,
+        pulsarRayo 2s ease-in-out infinite alternate;
+
+    animation-delay:
+        calc(var(--i) * 0.025s),
+        calc(1.8s + var(--i) * 0.015s);
+}
+
+
+/* ==============================
+   ESTRELLAS
+============================== */
+
+.rayo {
+    marker-end: url(#estrella);
+}
+
+
+/* ==============================
+   MENSAJE
+============================== */
+
+.mensaje {
+    position: absolute;
+
+    bottom: 38px;
+
+    color: #aaa;
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 5px #ff1493;
+
+    animation: aparecerTexto 3s ease-out;
+}
+
+
+/* ==============================
+   ANIMACIONES
+============================== */
+
+@keyframes aparecerRayo {
+
+    0% {
+        opacity: 0;
+        stroke-dasharray: 0 1000;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        stroke-dasharray: 1000 0;
+    }
+}
+
+
+@keyframes pulsarRayo {
+
+    from {
+        filter:
+            drop-shadow(0 0 2px var(--c))
+            drop-shadow(0 0 5px var(--c));
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 4px var(--c))
+            drop-shadow(0 0 12px var(--c))
+            drop-shadow(0 0 20px var(--c));
+    }
+}
+
+
+@keyframes latido {
+
+    0% {
+        transform: scale(0.96);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.96);
+    }
+}
+
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes aparecerTexto {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 700px) {
+
+    .encabezado h1 {
+        font-size: 30px;
+    }
+
+    .encabezado p {
+        font-size: 13px;
+    }
+
+    .corazon {
+        width: 100vw;
+        height: 75vh;
+    }
+
+    .mensaje {
+        font-size: 12px;
+    }
+}
